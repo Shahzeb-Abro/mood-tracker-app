@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Reddit Sans";
+  src: url(./assets/fonts/reddit-sans/RedditSans-Italic-VariableFont_wght.ttf);
+  font-style: italic;
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: "Reddit Sans";
+  src: url(./assets/fonts/reddit-sans/RedditSans-VariableFont_wght.ttf);
+  font-style: normal;
+  font-weight: 100 900;
+}
+
 @theme {
   /* colors  */
   /* neutrals */
@@ -24,8 +38,98 @@
   --color-indigo-200: #b8b1ff;
   --color-green-300: #89e780;
   --color-amber-300: #ffc97c;
+
+  /* typography */
+  --text-preset-9: 12px;
+  --text-preset-9--line-height: 110%;
+  --text-preset-9--letter-spacing: 0px;
+
+  --text-preset-8: 13px;
+  --text-preset-8--line-height: 100%;
+  --text-preset-8--letter-spacing: 0px;
+
+  --text-preset-7: 15px;
+  --text-preset-7--line-height: 140%;
+  --text-preset-7--letter-spacing: -0.3px;
+
+  --text-preset-6: 18px;
+  --text-preset-6--line-height: 140%;
+  --text-preset-6--letter-spacing: -0.3px;
+
+  --text-preset-6-i: 18px;
+  --text-preset-6-i--line-height: 130%;
+  --text-preset-6-i--letter-spacing: 0px;
+
+  --text-preset-6-m: 18px;
+  --text-preset-6-m--line-height: 120%;
+  --text-preset-6-m--letter-spacing: 0px;
+
+  --text-preset-5: 20px;
+  --text-preset-5--line-height: 140%;
+  --text-preset-5--letter-spacing: 0px;
+
+  --text-preset-4: 24px;
+  --text-preset-4--line-height: 140%;
+  --text-preset-4--letter-spacing: 0px;
+
+  --text-preset-4-sb: 24px;
+  --text-preset-4-sb--line-height: 140%;
+  --text-preset-4-sb--letter-spacing: 0px;
+
+  --text-preset-3-mobile: 28px;
+  --text-preset-3-mobile--line-height: 130%;
+  --text-preset-3-mobile--letter-spacing: -0.3px;
+
+  --text-preset-3: 32px;
+  --text-preset-3--line-height: 140%;
+  --text-preset-3--letter-spacing: -0.3px;
+
+  --text-preset-2-mobile: 32px;
+  --text-preset-2-mobile--line-height: 120%;
+  --text-preset-2-mobile--letter-spacing: -0.3px;
+
+  --text-preset-2: 40px;
+  --text-preset-2--line-height: 120%;
+  --text-preset-2--letter-spacing: -0.3px;
+
+  --text-preset-1-mobile: 46px;
+  --text-preset-1-mobile--line-height: 120%;
+  --text-preset-1-mobile--letter-spacing: -2px;
+
+  --text-preset-1: 52px;
+  --text-preset-1--line-height: 120%;
+  --text-preset-1--letter-spacing: -2px;
 }
 
 .light-gradient {
   background-image: linear-gradient(180deg, #f5f5ff 72.99%, #e0e0ff 100%);
+}
+
+.text-preset-6-i {
+  font-style: italic;
+}
+
+.text-preset-6-m {
+  font-weight: 500;
+}
+
+.text-preset-5 {
+  font-weight: 600;
+}
+
+.text-preset-4-sb {
+  font-weight: 600;
+}
+
+.text-preset-3,
+.text-preset-3-mobile,
+.text-preset-2,
+.text-preset-2-mobile,
+.text-preset-1,
+.text-preset-1-mobile {
+  font-weight: 700;
+}
+
+body {
+  font-family: "Reddit Sans", sans-serif;
 }
