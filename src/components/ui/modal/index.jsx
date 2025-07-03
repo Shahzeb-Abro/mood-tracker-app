@@ -15,7 +15,7 @@ export const Modal = ({ dialogTrigger, title, subTitle, footer, children }) => {
       {dialogTrigger && <DialogTrigger asChild>{dialogTrigger}</DialogTrigger>}
 
       <DialogContent
-        className="px-5 py-8 md:px-10 md:py-12  rounded-2xl bg-blue-100"
+        className="px-5 py-8 md:px-10 md:py-12  rounded-2xl bg-blue-100 gap-0"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogHeader className="text-left">
