@@ -5,10 +5,14 @@ export const Input = ({
   error,
   registerProps = {},
   className,
+  label,
   ...props
 }) => {
   return (
     <div className="flex flex-col gap-1.5">
+      {label && (
+        <label className="text-preset-6 mb-2 text-neutral-900">{label}</label>
+      )}
       <input
         placeholder={placeholder}
         {...registerProps}

@@ -1,4 +1,3 @@
-import { LogMoodModal } from "./modals";
 import { AppRouter } from "./routes/AppRouter";
 
 function App() {

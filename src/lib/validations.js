@@ -9,3 +9,13 @@ export const moodSchema = z.object({
     .min(1, "Select at least one tag")
     .max(3, "Select at most three tags"),
 });
+
+export const loginSchema = z.object({
+  email: z.string().min(1, "Email is required").email("Enter a valid email"),
+  password: z.string().min(1, "Password is required"),
+});
+
+export const registerSchema = z.object({
+  email: z.string().min(1, "Email is required").email("Enter a valid email"),
+  password: z.string().min(8, "Password must be atleast 8 characters"),
+});
