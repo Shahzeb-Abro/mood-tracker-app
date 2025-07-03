@@ -31,7 +31,7 @@ export const Register = () => {
       </div>
 
       <form
-        className="py-10 px-4 md:px-8 rounded-2xl bg-white shadow-auth flex flex-col gap-8"
+        className="py-10 px-4 md:px-8 rounded-2xl bg-white shadow-auth flex flex-col gap-8 md:min-w-[530px]"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* Header  */}

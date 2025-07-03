@@ -1,23 +1,22 @@
 import { Logo } from "@/assets/svgAssets";
 import { Button, Input } from "@/components";
-import { ROUTES } from "@/constants/routes";
-import { Link } from "react-router-dom";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "@/lib/validations";
+import { onboardingSchema } from "@/lib/validations";
+import { ImageUploader } from "./components";
 
-export const Login = () => {
+export const Onboarding = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      name: "",
+      file: null,
     },
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(onboardingSchema),
   });
 
   const onSubmit = (data) => {
@@ -36,37 +35,28 @@ export const Login = () => {
       >
         {/* Header  */}
         <div className="flex flex-col gap-2">
-          <h2 className="text-preset-3 text-neutral-900">Welcome Back!</h2>
+          <h2 className="text-preset-3 text-neutral-900">
+            Personalize your experience
+          </h2>
           <p className="text-preset-6 text-neutral-600">
-            Log in to continue tracking your mood and sleep.
+            Add your name and a profile picture to make Mood yours.
           </p>
         </div>
 
         {/* Inputs  */}
         <div className="flex flex-col gap-5">
           <Input
-            label="Email address"
-            placeholder="name@mail.com"
-            {...register("email")}
-            error={errors?.email?.message}
+            label="Name"
+            placeholder="Jane Appleseed"
+            {...register("name")}
+            error={errors?.name?.message}
           />
-          <Input
-            label="Password"
-            type="password"
-            {...register("password")}
-            error={errors?.password?.message}
-          />
+          <ImageUploader setValue={setValue} error={errors?.file?.message} />
         </div>
 
         {/* Actions  */}
         <div className="flex flex-col gap-5">
-          <Button label="Log In" className="w-full" type="submit" />
-          <p className="text-preset-6 text-center">
-            <span className="text-neutral-600">Haven't got an account?</span>{" "}
-            <Link to={ROUTES.REGISTER} className="text-blue-600">
-              Sign up.
-            </Link>
-          </p>
+          <Button label="Start Tracking" className="w-full" type="submit" />
         </div>
       </form>
     </main>

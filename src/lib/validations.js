@@ -19,3 +19,18 @@ export const registerSchema = z.object({
   email: z.string().min(1, "Email is required").email("Enter a valid email"),
   password: z.string().min(8, "Password must be atleast 8 characters"),
 });
+
+export const onboardingSchema = z.object({
+  name: z.string().optional(),
+  file: z
+    .any()
+    .optional()
+    .refine(
+      (file) =>
+        !file ||
+        (file instanceof File &&
+          /image\/(png|jpeg)/.test(file.type) &&
+          file.size <= 250 * 1024),
+      "Image must be PNG or JPEG and under 250KB"
+    ),
+});
