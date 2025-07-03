@@ -20,7 +20,7 @@ export const RadioButton = ({
             : "border-blue-100 bg-white border-[2px]"
         }`}
       ></span>
-      <div className={`text-preset-5 text-neutral-900 ${className}`}>
+      <div className={`text-preset-5 text-neutral-900 ${className} text-left`}>
         {label}
       </div>
     </button>

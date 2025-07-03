@@ -89,7 +89,10 @@ export const SecondStep = ({ selectedTags, setSelectedTags }) => {
       const updatedTags = selectedTags.filter((tag) => tag !== val);
       setSelectedTags(updatedTags);
     } else {
-      if (selectedTags.length < 3) setSelectedTags((prev) => [...prev, val]);
+      if (selectedTags.length < 3) {
+        const updatedTags = [...selectedTags, val];
+        setSelectedTags(updatedTags);
+      }
     }
   };
 
@@ -107,6 +110,7 @@ export const SecondStep = ({ selectedTags, setSelectedTags }) => {
       <div className="flex flex-wrap gap-x-4 gap-y-3">
         {tags.map((tag) => (
           <Checkbox
+            key={tag.id}
             checked={selectedTags.includes(tag.title)}
             label={tag.title}
             value={tag.title}
