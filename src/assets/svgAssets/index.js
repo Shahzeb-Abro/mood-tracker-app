@@ -21,6 +21,7 @@ import { IconVeryHappyWhite } from "./IconVeryHappyWhite";
 import { IconVerySadColor } from "./IconVerySadColor";
 import { IconVerySadWhite } from "./IconVerySadWhite";
 import { Logo } from "./Logo";
+import { IconInfo } from "./IconInfo";
 
 export {
   Logo,
@@ -46,4 +47,5 @@ export {
   IconHappyWhite,
   BgPatternAverages,
   AvatarPlaceholder,
+  IconInfo,
 };
