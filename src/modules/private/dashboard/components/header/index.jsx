@@ -1,0 +1,22 @@
+import { LogMoodModal } from "@/modals";
+
+export const Header = () => {
+  return (
+    <header className="mt-12 flex flex-col gap-12">
+      <div className="flex flex-col gap-4 md:gap-[10px] text-center">
+        <h3 className="text-[24px] font-bold leading-[130%] md:!text-preset-3 text-blue-600 -tracking-[0.3px]">
+          Hello, Lisa!
+        </h3>
+        <h1 className="text-preset-1-mobile md:text-preset-1 text-neutral-900">
+          How are you feeling today?
+        </h1>
+        <p className="text-preset-6 text-neutral-600">
+          Wednesday, April 16th, 2025
+        </p>
+      </div>
+      <div className="flex w-full justify-center">
+        <LogMoodModal />
+      </div>
+    </header>
+  );
+};

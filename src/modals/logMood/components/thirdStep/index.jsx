@@ -1,6 +1,6 @@
 import { Textbox } from "@/components";
 
-export const ThirdStep = ({ register }) => {
+export const ThirdStep = ({ register, descriptionLength }) => {
   return (
     <div className="flex flex-col gap-6 md:gap-8">
       <div className="flex flex-col gap-1.5">
@@ -13,6 +13,8 @@ export const ThirdStep = ({ register }) => {
         placeholder="Today, I felt..."
         className="placeholder:italic"
         {...register("description")}
+        helper={`${descriptionLength}/150`}
+        maxlength={150}
       />
     </div>
   );

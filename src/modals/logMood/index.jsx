@@ -21,6 +21,7 @@ export const LogMoodModal = () => {
     control,
     register,
     trigger,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(moodSchema),
@@ -31,6 +32,8 @@ export const LogMoodModal = () => {
       tags: [],
     },
   });
+
+  const description = watch("description");
 
   const handleNextStep = async () => {
     let currentFieldName;
@@ -63,7 +66,7 @@ export const LogMoodModal = () => {
           onClick={currentStep === 4 ? handleSubmit(onSubmit) : handleNextStep}
         />
       }
-      dialogTrigger={<Button label="Log Your Mood" />}
+      dialogTrigger={<Button label="Log today's mood" />}
     >
       <Steps currentStep={currentStep} setCurrentStep={setCurrentStep} />
 
@@ -106,7 +109,12 @@ export const LogMoodModal = () => {
           />
         )}
 
-        {currentStep === 3 && <ThirdStep register={register} />}
+        {currentStep === 3 && (
+          <ThirdStep
+            register={register}
+            descriptionLength={description.length}
+          />
+        )}
 
         {currentStep === 4 && (
           <Controller
