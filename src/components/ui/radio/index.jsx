@@ -14,7 +14,7 @@ export const RadioButton = ({
       } w-full`}
     >
       <span
-        className={`flex items-center justify-center size-5 rounded-full  transition-all duration-200 ${
+        className={`flex items-center justify-center size-5 rounded-full flex-shrink-0  transition-all duration-200 ${
           checked
             ? " border-4 border-blue-600 bg-white"
             : "border-blue-100 bg-white border-[2px]"

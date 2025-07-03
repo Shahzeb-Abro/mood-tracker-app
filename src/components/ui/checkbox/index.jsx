@@ -1,8 +1,13 @@
-export const Checkbox = ({ label = "Tag", checked = false, setChecked }) => {
+export const Checkbox = ({
+  label = "Tag",
+  value,
+  checked = false,
+  setChecked,
+}) => {
   return (
     <button
       type="button"
-      onClick={() => setChecked((prev) => !prev)}
+      onClick={() => setChecked(value)}
       className={`flex items-center gap-2 border-[2px] rounded-[10px] px-4 py-2.5 bg-white transition-colors duration-200 box-border focus:outline-none ${
         checked ? "border-blue-600" : "border-blue-100"
       }`}

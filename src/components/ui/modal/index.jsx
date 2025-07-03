@@ -31,7 +31,7 @@ export const Modal = ({ dialogTrigger, title, subTitle, footer, children }) => {
           )}
         </DialogHeader>
 
-        {children}
+        <div className="-mx-5 md:-mx-10">{children}</div>
 
         {footer && <DialogFooter>{footer}</DialogFooter>}
       </DialogContent>
