@@ -3,7 +3,7 @@ import { Navbar } from "./components";
 
 export const DashboardLayout = () => {
   return (
-    <main>
+    <main className="w-full min-h-screen light-gradient">
       <Navbar />
       <Outlet />
     </main>
