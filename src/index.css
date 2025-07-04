@@ -141,9 +141,9 @@
   font-weight: 700;
 }
 
-.recharts-bar-rectangle:focus {
-  outline: none !important;
-  box-shadow: none !important;
+
+.recharts-tooltip-cursor {
+  display: none;
 }
 
 body {

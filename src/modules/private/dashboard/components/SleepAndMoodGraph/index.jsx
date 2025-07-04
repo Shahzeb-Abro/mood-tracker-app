@@ -281,7 +281,12 @@ export const MoodSleepChart = () => {
 
               <Tooltip content={<CustomTooltip />} />
 
-              <Bar dataKey="sleepValue" radius={[40, 40, 0, 0]} barSize={40}>
+              <Bar
+                dataKey="sleepValue"
+                radius={[40, 40, 0, 0]}
+                barSize={40}
+                cursor={false}
+              >
                 {chartData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
