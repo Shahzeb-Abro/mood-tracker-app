@@ -7,6 +7,7 @@ import {
   IconLogout,
   IconSettings,
 } from "@/assets/svgAssets";
+import { SettingsModal } from "@/modals";
 
 export const ProfilePopover = () => {
   return (
@@ -36,10 +37,7 @@ export const ProfilePopover = () => {
             <div className="w-full h-[1px] bg-blue-100 my-3"></div>
 
             <div className="flex flex-col gap-3 text-neutral-900">
-              <div className="flex items-center gap-2.5 cursor-pointer">
-                <IconSettings />
-                Settings
-              </div>
+              <SettingsModal />
               <div className="flex items-center gap-2.5 cursor-pointer">
                 <IconLogout />
                 Logout
