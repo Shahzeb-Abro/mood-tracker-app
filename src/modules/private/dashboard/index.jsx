@@ -7,7 +7,7 @@ import {
 import { TodaysMood } from "./components/todaysMood";
 
 export const Dashboard = () => {
-  const todaysMoodLogged = false;
+  const todaysMoodLogged = true;
   return (
     <div className="px-4">
       <Header todaysMoodLogged={todaysMoodLogged} />

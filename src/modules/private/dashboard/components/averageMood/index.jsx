@@ -42,7 +42,7 @@ const options = [
 ];
 
 export const AverageMood = () => {
-  const avgMood = "";
+  const avgMood = "Very Happy";
   const avgMoodDetails = options.filter(
     (option) => option.label === avgMood
   )[0];

@@ -8,6 +8,8 @@ import {
   IconSettings,
 } from "@/assets/svgAssets";
 import { SettingsModal } from "@/modals";
+import { Link } from "react-router-dom";
+import { ROUTES } from "@/constants/routes";
 
 export const ProfilePopover = () => {
   return (
@@ -38,10 +40,13 @@ export const ProfilePopover = () => {
 
             <div className="flex flex-col gap-3 text-neutral-900">
               <SettingsModal />
-              <div className="flex items-center gap-2.5 cursor-pointer">
+              <Link
+                to={ROUTES.LOGIN}
+                className="flex items-center gap-2.5 cursor-pointer"
+              >
                 <IconLogout />
                 Logout
-              </div>
+              </Link>
             </div>
           </div>
         </Popover.Content>
