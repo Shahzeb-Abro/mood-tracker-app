@@ -34,45 +34,65 @@ const sleepRangeOrder = {
 const sleepLabels = Object.keys(sleepRangeOrder);
 console.log("Sleep Labels", sleepLabels);
 
-const moodData = [
-  {
-    date: "June 27",
-    mood: "😊",
-    moodLabel: "Very Happy",
-    sleepHours: "9+ hours",
-    reflection: "Slept well and woke up ready to tackle new challenges.",
-    tags: ["Joyful", "Excited", "Grateful"],
-    sleepValue: sleepRangeOrder["9+ hours"],
-  },
-  {
-    date: "July 02",
-    mood: "😐",
-    moodLabel: "Neutral",
-    sleepHours: "5-6 hours",
-    reflection: "Feeling okay, could use more sleep.",
-    tags: ["Tired", "Calm"],
-    sleepValue: sleepRangeOrder["5-6 hours"],
-  },
-  {
-    date: "July 03",
-    mood: "😐",
-    moodLabel: "Sad",
-    sleepHours: "3-4 hours",
-    reflection: "Feeling sad, could use more sleep.",
-    tags: ["Tired", "Calm"],
-    sleepValue: sleepRangeOrder["3-4 hours"],
-  },
-  {
-    date: "June 25",
-    mood: "😐",
-    moodLabel: "Very Happy",
-    sleepHours: "0-2 hours",
-    reflection: "It is my birthday today, I am really happy! Hurray!",
-    tags: ["Tired", "Calm"],
-    sleepValue: sleepRangeOrder["0-2 hours"],
-  },
-  // Add more data as needed
-];
+// const moodData = [
+//   {
+//     date: "June 27",
+//     mood: "😊",
+//     moodLabel: "Very Happy",
+//     sleepHours: "9+ hours",
+//     reflection: "Slept well and woke up ready to tackle new challenges.",
+//     tags: ["Joyful", "Excited", "Grateful"],
+//     sleepValue: sleepRangeOrder["9+ hours"],
+//   },
+//   {
+//     date: "June 29",
+//     mood: "😊",
+//     moodLabel: "Very Sad",
+//     sleepHours: "0-2 hours",
+//     reflection: "I am just so sad",
+//     tags: ["Joyful", "Excited", "Grateful"],
+//     sleepValue: sleepRangeOrder["0-2 hours"],
+//   },
+//   {
+//     date: "July 01",
+//     mood: "😐",
+//     moodLabel: "Neutral",
+//     sleepHours: "7-8 hours",
+//     reflection: "Feeling okay, could use more sleep.",
+//     tags: ["Tired", "Calm"],
+//     sleepValue: sleepRangeOrder["7-8 hours"],
+//   },
+//   {
+//     date: "July 02",
+//     mood: "😐",
+//     moodLabel: "Neutral",
+//     sleepHours: "5-6 hours",
+//     reflection: "Feeling okay, could use more sleep.",
+//     tags: ["Tired", "Calm"],
+//     sleepValue: sleepRangeOrder["5-6 hours"],
+//   },
+//   {
+//     date: "July 03",
+//     mood: "😐",
+//     moodLabel: "Sad",
+//     sleepHours: "3-4 hours",
+//     reflection: "Feeling sad, could use more sleep.",
+//     tags: ["Tired", "Calm"],
+//     sleepValue: sleepRangeOrder["3-4 hours"],
+//   },
+//   {
+//     date: "June 25",
+//     mood: "😐",
+//     moodLabel: "Very Happy",
+//     sleepHours: "0-2 hours",
+//     reflection: "It is my birthday today, I am really happy! Hurray!",
+//     tags: ["Tired", "Calm"],
+//     sleepValue: sleepRangeOrder["0-2 hours"],
+//   },
+//   // Add more data as needed
+// ];
+
+const moodData = []
 
 // Helper to format dates as "Month dd"
 const formatDate = (date) =>
@@ -153,7 +173,7 @@ const CustomTooltip = ({ active, payload }) => {
           <div className="text-preset-8 font-semibold text-neutral-600">
             Reflection
           </div>
-          <div className="text-preset-7 text-neutral-900">
+          <div className="text-preset-9 text-neutral-900">
             {entry.reflection}
           </div>
         </div>
@@ -161,7 +181,7 @@ const CustomTooltip = ({ active, payload }) => {
           <div className="text-preset-8 font-semibold text-neutral-600">
             Tags
           </div>
-          <div className="text-preset-7 text-neutral-900">
+          <div className="text-preset-9 text-neutral-900">
             {entry.tags.join(", ")}
           </div>
         </div>

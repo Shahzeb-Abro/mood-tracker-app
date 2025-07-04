@@ -33,7 +33,7 @@ const options = [
 ];
 
 export const AverageSleep = () => {
-  const avgSleep = "5-6 hours";
+  const avgSleep = "";
   const avgSleepDetails = options.filter(
     (option) => option.label === avgSleep
   )[0];
