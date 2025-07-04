@@ -1,6 +1,6 @@
 import { LogMoodModal } from "@/modals";
 
-export const Header = () => {
+export const Header = ({ todaysMoodLogged }) => {
   return (
     <header className="mt-12 flex flex-col gap-12">
       <div className="flex flex-col gap-4 md:gap-[10px] text-center">
@@ -14,9 +14,12 @@ export const Header = () => {
           Wednesday, April 16th, 2025
         </p>
       </div>
-      <div className="flex w-full justify-center">
-        <LogMoodModal />
-      </div>
+
+      {!todaysMoodLogged && (
+        <div className="flex w-full justify-center">
+          <LogMoodModal />
+        </div>
+      )}
     </header>
   );
 };

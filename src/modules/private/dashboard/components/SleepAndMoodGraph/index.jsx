@@ -146,7 +146,7 @@ const CustomTooltip = ({ active, payload }) => {
             Sleep
           </div>
           <div className="text-preset-7 text-neutral-900">
-            {entry.sleepHours}+ hours
+            {entry.sleepHours}
           </div>
         </div>
         <div className="flex flex-col gap-2">
