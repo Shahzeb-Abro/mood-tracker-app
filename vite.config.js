@@ -15,6 +15,6 @@ export default defineConfig({
     },
   },
   server: {
-    origin: ["https://mood-tracker-api.shahzebabro.com"],
+    allowedHosts: ["https://mood-tracker-api.shahzebabro.com"],
   },
 });

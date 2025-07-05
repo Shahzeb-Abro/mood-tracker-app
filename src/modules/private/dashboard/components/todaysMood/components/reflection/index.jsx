@@ -12,7 +12,7 @@ export const Reflection = ({ reflection, tags }) => {
       <div className="text-preset-6 text-neutral-900 flex-1">{reflection}</div>
 
       <div className="flex items-center gap-3 text-neutral-600 text-preset-6-i">
-        {tags.map((tag) => (
+        {tags?.map((tag) => (
           <span>#{tag}</span>
         ))}
       </div>

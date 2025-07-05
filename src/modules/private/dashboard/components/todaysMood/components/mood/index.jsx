@@ -38,7 +38,7 @@ export const Mood = ({ mood }) => {
           <div className="text-preset-2 text-neutral-900">{mood}</div>
         </div>
 
-        <div className="lg:hidden">{moodToIcon[mood]["sm"]}</div>
+        {mood && <div className="lg:hidden">{moodToIcon[mood]["sm"]}</div>}
 
         <div className="flex flex-col gap-4 items-center text-center lg:items-start lg:text-left">
           <IconQuote />
@@ -47,7 +47,9 @@ export const Mood = ({ mood }) => {
           </p>
         </div>
       </div>
-      <div className="hidden lg:block -mb-16">{moodToIcon[mood]["lg"]}</div>
+      {mood && (
+        <div className="hidden lg:block -mb-16">{moodToIcon[mood]["lg"]}</div>
+      )}
     </div>
   );
 };

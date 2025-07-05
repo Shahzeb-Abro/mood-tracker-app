@@ -18,3 +18,22 @@ export const getMoodBetweenDates = async ({ startDate, endDate }) => {
   });
   return response.data;
 };
+
+export const getTodaysMood = async () => {
+  try {
+    const response = await axios.get(`${baseUrl}/today`);
+    console.log("Response", response);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const logTodaysMood = async (body) => {
+  try {
+    const response = await axios.post(`${baseUrl}/`, body);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
