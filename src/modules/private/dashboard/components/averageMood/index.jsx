@@ -7,6 +7,7 @@ import {
   IconVeryHappyWhite,
   IconVerySadWhite,
 } from "@/assets/svgAssets";
+import { TrendToText } from "@/lib/TrendToText";
 
 const options = [
   {
@@ -41,8 +42,9 @@ const options = [
   },
 ];
 
-export const AverageMood = () => {
-  const avgMood = "Very Happy";
+export const AverageMood = ({ averageMood, moodTrend }) => {
+  const avgMood = averageMood;
+
   const avgMoodDetails = options.filter(
     (option) => option.label === avgMood
   )[0];
@@ -58,7 +60,7 @@ export const AverageMood = () => {
 
       <div
         className={`min-h-[150px] rounded-[20px] p-5 pr-16 relative w-full justify-center  text-neutral-900 overflow-hidden flex flex-col gap-3 ${
-          avgMood === "" ? "bg-blue-100" : avgMoodDetails.styles
+          avgMood === "" ? "bg-blue-100" : avgMoodDetails?.styles
         }`}
       >
         {avgMood === "" ? (
@@ -71,15 +73,10 @@ export const AverageMood = () => {
         ) : (
           <>
             <div className="flex items-center gap-4 text-preset-4-sb">
-              <span>{avgMoodDetails.icon}</span>
-              <span>{avgMoodDetails.label}</span>
+              <span>{avgMoodDetails?.icon}</span>
+              <span>{avgMoodDetails?.label}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <IconTrendSame />
-              <span className="text-preset-7">
-                Same as the previous 5 check-ins
-              </span>
-            </div>
+            <TrendToText trend={moodTrend} />
           </>
         )}
 

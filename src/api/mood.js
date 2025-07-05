@@ -37,3 +37,12 @@ export const logTodaysMood = async (body) => {
     console.error(err);
   }
 };
+
+export const getAverageMoodAndSleepValue = async () => {
+  try {
+    const response = await axios.get(`${baseUrl}/average-mood-and-sleep-value`);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
+};

@@ -1,41 +1,32 @@
-import {
-  BgPatternAverages,
-  IconSleep,
-  IconTrendIncrease,
-} from "@/assets/svgAssets";
+import { BgPatternAverages, IconSleep } from "@/assets/svgAssets";
+import { TrendToText } from "@/lib/TrendToText";
 
 const options = [
   {
     id: 0,
     label: "9+ hours",
-    styles: "bg-amber-300",
   },
   {
     id: 1,
     label: "7-8 hours",
-    styles: "bg-green-300",
   },
   {
     id: 2,
     label: "5-6 hours",
-    styles: "bg-sky-300",
   },
   {
     id: 3,
     label: "3-4 hours",
-    styles: "bg-indigo-200",
   },
   {
     id: 4,
     label: "0-2 hours",
-    styles: "bg-red-300",
   },
 ];
 
-export const AverageSleep = () => {
-  const avgSleep = "9+ hours";
+export const AverageSleep = ({ averageSleep, sleepTrend }) => {
   const avgSleepDetails = options.filter(
-    (option) => option.label === avgSleep
+    (option) => option.label === averageSleep
   )[0];
   return (
     <div className="flex flex-col gap-3 ">
@@ -47,11 +38,9 @@ export const AverageSleep = () => {
       </h4>
 
       <div
-        className={`min-h-[150px] rounded-[20px] p-5 pr-16 relative w-full justify-center  text-neutral-900 overflow-hidden flex flex-col gap-3 ${
-          avgSleep === "" ? "bg-blue-100" : avgSleepDetails.styles
-        }`}
+        className={`min-h-[150px] rounded-[20px] p-5 pr-16 relative w-full justify-center  text-white overflow-hidden flex flex-col gap-3 bg-blue-600`}
       >
-        {avgSleep === "" ? (
+        {averageSleep === "" ? (
           <>
             <div className="text-preset-4-sb">Not enough data yet!</div>
             <div className="text-preset-7">
@@ -61,17 +50,16 @@ export const AverageSleep = () => {
         ) : (
           <>
             <div className="flex items-center gap-4 text-preset-4-sb">
-              <span>
-                <IconSleep />
+              <span className="text-white/70">
+                <IconSleep width={24} height={24} />
               </span>
-              <span>{avgSleepDetails.label}</span>
+              <span>{avgSleepDetails?.label}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <IconTrendIncrease />
-              <span className="text-preset-7">
-                Increase from the previous 5 check-ins
-              </span>
-            </div>
+            <TrendToText
+              trend={sleepTrend}
+              textStyles={"text-white/70"}
+              iconStyles={"text-white/70"}
+            />
           </>
         )}
 
