@@ -1,3 +1,4 @@
+import { getMoodBetweenDates } from "@/api/mood";
 import {
   IconHappyColor,
   IconHappyWhite,
@@ -11,6 +12,7 @@ import {
   IconVerySadColor,
   IconVerySadWhite,
 } from "@/assets/svgAssets";
+import { useQuery } from "@tanstack/react-query";
 import {
   BarChart,
   Bar,
@@ -34,64 +36,6 @@ const sleepRangeOrder = {
 const sleepLabels = Object.keys(sleepRangeOrder);
 console.log("Sleep Labels", sleepLabels);
 
-const moodData = [
-  {
-    date: "June 27",
-    mood: "😊",
-    moodLabel: "Very Happy",
-    sleepHours: "9+ hours",
-    reflection: "Slept well and woke up ready to tackle new challenges.",
-    tags: ["Joyful", "Excited", "Grateful"],
-    sleepValue: sleepRangeOrder["9+ hours"],
-  },
-  {
-    date: "June 29",
-    mood: "😊",
-    moodLabel: "Very Sad",
-    sleepHours: "0-2 hours",
-    reflection: "I am just so sad",
-    tags: ["Joyful", "Excited", "Grateful"],
-    sleepValue: sleepRangeOrder["0-2 hours"],
-  },
-  {
-    date: "July 01",
-    mood: "😐",
-    moodLabel: "Neutral",
-    sleepHours: "7-8 hours",
-    reflection: "Feeling okay, could use more sleep.",
-    tags: ["Tired", "Calm"],
-    sleepValue: sleepRangeOrder["7-8 hours"],
-  },
-  {
-    date: "July 02",
-    mood: "😐",
-    moodLabel: "Neutral",
-    sleepHours: "5-6 hours",
-    reflection: "Feeling okay, could use more sleep.",
-    tags: ["Tired", "Calm"],
-    sleepValue: sleepRangeOrder["5-6 hours"],
-  },
-  {
-    date: "July 03",
-    mood: "😐",
-    moodLabel: "Sad",
-    sleepHours: "3-4 hours",
-    reflection: "Feeling sad, could use more sleep.",
-    tags: ["Tired", "Calm"],
-    sleepValue: sleepRangeOrder["3-4 hours"],
-  },
-  {
-    date: "June 25",
-    mood: "😐",
-    moodLabel: "Very Happy",
-    sleepHours: "0-2 hours",
-    reflection: "It is my birthday today, I am really happy! Hurray!",
-    tags: ["Tired", "Calm"],
-    sleepValue: sleepRangeOrder["0-2 hours"],
-  },
-  // Add more data as needed
-];
-
 // Helper to format dates as "Month dd"
 const formatDate = (date) =>
   date.toLocaleString("en-US", { month: "long", day: "2-digit" });
@@ -106,24 +50,6 @@ const getLast11Days = () => {
   }
   return dates.reverse(); // Show oldest first
 };
-
-// Merge moodData into full date range
-const generateChartData = () => {
-  const last11Days = getLast11Days();
-  console.log("Last 11 Days", last11Days);
-  return last11Days.map((dateStr) => {
-    const match = moodData.find((entry) => entry.date === dateStr);
-    if (match) return match;
-    return { date: dateStr, sleepValue: 0, tags: [], mood: "", sleepHours: "" }; // Empty bar
-  });
-};
-
-const chartData = generateChartData();
-
-console.log(
-  "Chart Data:",
-  chartData.map((d) => d.date)
-);
 
 const getSleepColor = (hours) => {
   if (hours === "9+ hours") return "#ffc97c";
@@ -156,7 +82,7 @@ const CustomTooltip = ({ active, payload }) => {
             Mood
           </div>
           <div className="text-preset-7 text-neutral-900 flex items-center gap-1.5">
-            <span>{popoverMoodToIcon[entry.moodLabel]}</span> {entry.moodLabel}
+            <span>{popoverMoodToIcon[entry.mood]}</span> {entry.mood}
           </div>
         </div>
         <div className="flex flex-col gap-2">
@@ -251,6 +177,41 @@ const CustomYAxisTick = ({ x, y, payload }) => {
 };
 
 export const MoodSleepChart = () => {
+  const { data, isLoading } = useQuery({
+    queryKey: ["mood-sleep-chart"],
+    queryFn: getMoodBetweenDates,
+  });
+
+  const moodData = data?.data || [];
+  const modifiedMoodData = moodData.map((entry) => ({
+    ...entry,
+    date: formatDate(new Date(entry.createdAt)),
+  }));
+
+  console.log("Mood Data", moodData);
+
+  // Merge moodData into full date range
+  const generateChartData = () => {
+    const last11Days = getLast11Days();
+    console.log("Last 11 Days", last11Days);
+    return last11Days.map((dateStr) => {
+      const match = modifiedMoodData.find((entry) => entry.date === dateStr);
+      if (match) return match;
+      return {
+        date: dateStr,
+        sleepValue: 0,
+        tags: [],
+        mood: "",
+        sleepHours: "",
+      }; // Empty bar
+    });
+  };
+
+  const chartData = generateChartData();
+
+  console.log("Chart Data", chartData);
+
+  if (isLoading) return <div>Loading...</div>;
   return (
     <div>
       <h3 className="text-preset-3-mobile lg:text-preset-3 text-neutral-900 mb-8">
@@ -315,7 +276,7 @@ export const MoodSleepChart = () => {
                   dataKey="sleepValue"
                   content={({ x, y, width, index }) => {
                     const entry = chartData[index];
-                    if (!entry?.moodLabel) return null;
+                    if (!entry?.mood) return null;
 
                     const iconSize = 31;
                     const centerX = x + width / 2 - iconSize / 2;
@@ -339,7 +300,7 @@ export const MoodSleepChart = () => {
                             pointerEvents: "none",
                           }}
                         >
-                          <MoodIcon mood={entry.moodLabel} />
+                          <MoodIcon mood={entry.mood} />
                         </div>
                       </foreignObject>
                     );
