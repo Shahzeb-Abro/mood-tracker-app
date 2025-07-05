@@ -1,17 +1,25 @@
 import * as Popover from "@radix-ui/react-popover";
-import { LogOut, Settings, User } from "lucide-react";
 
 import profile from "../../../../../../assets/images/avatar-lisa.jpg";
-import {
-  IconDropdownArrow,
-  IconLogout,
-  IconSettings,
-} from "@/assets/svgAssets";
+import { IconDropdownArrow, IconLogout } from "@/assets/svgAssets";
 import { SettingsModal } from "@/modals";
-import { Link } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
+import { useMutation } from "@tanstack/react-query";
+import { logout } from "@/api/auth";
+import { useNavigate } from "react-router-dom";
 
 export const ProfilePopover = () => {
+  const navigate = useNavigate();
+  const { mutate: logoutUser } = useMutation({
+    mutationFn: logout,
+    onSuccess: (res) => {
+      console.log("Res", res);
+      navigate(ROUTES.LOGIN);
+    },
+    onError: (err) => {
+      console.log("Error", err);
+    },
+  });
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
@@ -40,13 +48,13 @@ export const ProfilePopover = () => {
 
             <div className="flex flex-col gap-3 text-neutral-900">
               <SettingsModal />
-              <Link
-                to={ROUTES.LOGIN}
-                className="flex items-center gap-2.5 cursor-pointer"
+              <button
+                onClick={() => logoutUser()}
+                className="flex items-center gap-2.5 cursor-pointer border-none outline-none"
               >
                 <IconLogout />
-                Logout
-              </Link>
+                <span>Logout</span>
+              </button>
             </div>
           </div>
         </Popover.Content>

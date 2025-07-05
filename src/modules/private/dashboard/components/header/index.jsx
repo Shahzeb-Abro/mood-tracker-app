@@ -1,6 +1,15 @@
 import { LogMoodModal } from "@/modals";
 
 export const Header = ({ todaysMoodLogged }) => {
+  const date = new Date();
+
+  const formatted = date.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <header className="mt-12 flex flex-col gap-12">
       <div className="flex flex-col gap-4 md:gap-[10px] text-center">
@@ -10,9 +19,7 @@ export const Header = ({ todaysMoodLogged }) => {
         <h1 className="text-preset-1-mobile md:text-preset-1 text-neutral-900">
           How are you feeling today?
         </h1>
-        <p className="text-preset-6 text-neutral-600">
-          Wednesday, April 16th, 2025
-        </p>
+        <p className="text-preset-6 text-neutral-600">{formatted}</p>
       </div>
 
       {!todaysMoodLogged && (

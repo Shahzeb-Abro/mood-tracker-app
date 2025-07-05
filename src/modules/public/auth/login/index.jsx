@@ -1,13 +1,16 @@
 import { Logo } from "@/assets/svgAssets";
 import { Button, Input } from "@/components";
 import { ROUTES } from "@/constants/routes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/lib/validations";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "@/api/auth";
 
 export const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -20,8 +23,20 @@ export const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
+  const { mutate: loginUser } = useMutation({
+    mutationFn: login,
+    onSuccess: (res) => {
+      console.log("Res", res);
+      navigate(ROUTES.DASHBOARD);
+    },
+    onError: (err) => {
+      console.log("Error", err);
+    },
+  });
+
   const onSubmit = (data) => {
     console.log("Data", data);
+    loginUser(data);
   };
 
   return (

@@ -15,13 +15,16 @@ export const getMoodBetweenDates = async ({ startDate, endDate }) => {
 
   const response = await axios.get(`${baseUrl}/between-dates`, {
     params: { startDate, endDate },
+    withCredentials: true,
   });
   return response.data;
 };
 
 export const getTodaysMood = async () => {
   try {
-    const response = await axios.get(`${baseUrl}/today`);
+    const response = await axios.get(`${baseUrl}/today`, {
+      withCredentials: true,
+    });
     console.log("Response", response);
     return response.data;
   } catch (err) {
@@ -31,7 +34,9 @@ export const getTodaysMood = async () => {
 
 export const logTodaysMood = async (body) => {
   try {
-    const response = await axios.post(`${baseUrl}/`, body);
+    const response = await axios.post(`${baseUrl}/`, body, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (err) {
     console.error(err);
@@ -40,7 +45,12 @@ export const logTodaysMood = async (body) => {
 
 export const getAverageMoodAndSleepValue = async () => {
   try {
-    const response = await axios.get(`${baseUrl}/average-mood-and-sleep-value`);
+    const response = await axios.get(
+      `${baseUrl}/average-mood-and-sleep-value`,
+      {
+        withCredentials: true,
+      }
+    );
     return response.data;
   } catch (err) {
     console.error(err);

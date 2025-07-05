@@ -15,6 +15,6 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: ["https://mood-tracker-api.shahzebabro.com"],
+    allowedHosts: ["https://mood-tracker-api.shahzebabro.com", "localhost"],
   },
 });
