@@ -1,4 +1,6 @@
+import { getMe } from "@/api/auth";
 import { LogMoodModal } from "@/modals";
+import { useQuery } from "@tanstack/react-query";
 
 export const Header = ({ todaysMoodLogged }) => {
   const date = new Date();
@@ -10,11 +12,18 @@ export const Header = ({ todaysMoodLogged }) => {
     day: "numeric",
   });
 
+  const { data } = useQuery({
+    queryFn: getMe,
+    queryKey: ["me"],
+  });
+
+  const name = data?.user?.name;
+
   return (
     <header className="mt-12 flex flex-col gap-12">
       <div className="flex flex-col gap-4 md:gap-[10px] text-center">
         <h3 className="text-[24px] font-bold leading-[130%] md:!text-preset-3 text-blue-600 -tracking-[0.3px]">
-          Hello, Lisa!
+          Hello, {name || "User"}!
         </h3>
         <h1 className="text-preset-1-mobile md:text-preset-1 text-neutral-900">
           How are you feeling today?

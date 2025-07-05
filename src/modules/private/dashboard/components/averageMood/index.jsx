@@ -45,6 +45,8 @@ const options = [
 export const AverageMood = ({ averageMood, moodTrend }) => {
   const avgMood = averageMood;
 
+  console.log("Avg Mood", avgMood);
+
   const avgMoodDetails = options.filter(
     (option) => option.label === avgMood
   )[0];
@@ -60,10 +62,10 @@ export const AverageMood = ({ averageMood, moodTrend }) => {
 
       <div
         className={`min-h-[150px] rounded-[20px] p-5 pr-16 relative w-full justify-center  text-neutral-900 overflow-hidden flex flex-col gap-3 ${
-          avgMood === "" ? "bg-blue-100" : avgMoodDetails?.styles
+          !avgMood ? "bg-blue-100" : avgMoodDetails?.styles
         }`}
       >
-        {avgMood === "" ? (
+        {!avgMood ? (
           <>
             <div className="text-preset-4-sb">Keep tracking!</div>
             <div className="text-preset-7">

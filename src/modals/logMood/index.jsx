@@ -1,6 +1,7 @@
 import { Button, Modal } from "@/components";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   FirstStep,
   FourthStep,
@@ -10,8 +11,7 @@ import {
 } from "./components";
 import { moodSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const MAX_STEPS = 4;
+import { logTodaysMood } from "@/api/mood";
 
 export const LogMoodModal = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -27,13 +27,34 @@ export const LogMoodModal = () => {
     resolver: zodResolver(moodSchema),
     defaultValues: {
       mood: "",
-      sleep: "",
-      description: "",
+      sleepHours: "",
+      reflection: "",
       tags: [],
     },
   });
 
-  const description = watch("description");
+  const queryClient = useQueryClient();
+
+  const { mutate: logMood } = useMutation({
+    mutationFn: logTodaysMood,
+    onSuccess: (res) => {
+      console.log("Res", res);
+      queryClient.invalidateQueries({
+        queryKey: ["todays-mood"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["average-mood-and-sleep-value"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["mood-sleep-chart"],
+      });
+    },
+    onError: (err) => {
+      console.log("Error", err);
+    },
+  });
+
+  const description = watch("reflection");
 
   const handleNextStep = async () => {
     let currentFieldName;
@@ -52,6 +73,7 @@ export const LogMoodModal = () => {
 
   const onSubmit = (data) => {
     console.log("Form submitted successfully", data);
+    logMood(data);
   };
 
   console.log("Errors", errors);
@@ -118,7 +140,7 @@ export const LogMoodModal = () => {
 
         {currentStep === 4 && (
           <Controller
-            name="sleep"
+            name="sleepHours"
             control={control}
             render={({ field }) => (
               <FourthStep

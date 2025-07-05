@@ -12,7 +12,7 @@ export const ThirdStep = ({ register, descriptionLength }) => {
       <Textbox
         placeholder="Today, I felt..."
         className="placeholder:italic"
-        {...register("description")}
+        {...register("reflection")}
         helper={`${descriptionLength}/150`}
         maxlength={150}
       />

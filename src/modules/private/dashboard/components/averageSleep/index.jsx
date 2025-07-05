@@ -40,7 +40,7 @@ export const AverageSleep = ({ averageSleep, sleepTrend }) => {
       <div
         className={`min-h-[150px] rounded-[20px] p-5 pr-16 relative w-full justify-center  text-white overflow-hidden flex flex-col gap-3 bg-blue-600`}
       >
-        {averageSleep === "" ? (
+        {!averageSleep ? (
           <>
             <div className="text-preset-4-sb">Not enough data yet!</div>
             <div className="text-preset-7">

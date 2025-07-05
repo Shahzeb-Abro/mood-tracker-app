@@ -43,11 +43,11 @@ export const moodSchema = z.object({
     required_error: "Please select your mood",
     invalid_type_error: "Please select a valid mood option",
   }),
-  sleep: z.enum(SLEEP_OPTIONS, {
+  sleepHours: z.enum(SLEEP_OPTIONS, {
     required_error: "Please select your sleep duration",
     invalid_type_error: "Please select a valid sleep duration option",
   }),
-  description: z.string().max(150, "Cannot exceed 150 characters").optional(),
+  reflection: z.string().max(150, "Cannot exceed 150 characters").optional(),
   tags: z
     .array(
       z.enum(TAG_OPTIONS, {

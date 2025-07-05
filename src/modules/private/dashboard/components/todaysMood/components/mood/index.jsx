@@ -6,6 +6,8 @@ import {
   IconVeryHappyColor,
   IconVerySadColor,
 } from "@/assets/svgAssets";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 export const Mood = ({ mood }) => {
   const moodToIcon = {
@@ -30,6 +32,19 @@ export const Mood = ({ mood }) => {
       lg: <IconVerySadColor width={320} height={320} />,
     },
   };
+
+  const getRandomQuote = async () => {
+    const response = await axios.get(
+      "https://api.quotable.io/random?tags=happiness|sadness|inspirational&maxLength=100"
+    );
+    return response.data.content;
+  };
+
+  const { data: quote } = useQuery({
+    queryFn: getRandomQuote,
+    queryKey: ["random-quote"],
+  });
+
   return (
     <div className="flex flex-col gap-8 items-center lg:items-stretch lg:justify-between lg:flex-row ">
       <div className="flex flex-col gap-8 items-center lg:items-stretch lg:justify-between">
@@ -42,9 +57,7 @@ export const Mood = ({ mood }) => {
 
         <div className="flex flex-col gap-4 items-center text-center lg:items-start lg:text-left">
           <IconQuote />
-          <p className="text-preset-6-i text-neutral-900">
-            “When your heart is full, share your light with the world.”
-          </p>
+          <p className="text-preset-6-i text-neutral-900">“{quote}”</p>
         </div>
       </div>
       {mood && (
