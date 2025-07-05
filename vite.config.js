@@ -14,4 +14,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    origin: ["https://mood-tracker-api.shahzebabro.com"],
+  },
 });
