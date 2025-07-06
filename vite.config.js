@@ -15,6 +15,10 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: ["https://mood-tracker-api.shahzebabro.com", "localhost"],
+    allowedHosts: [
+      "https://mood-tracker-api.shahzebabro.com",
+      "localhost",
+      "https://zenquotes.io",
+    ],
   },
 });
