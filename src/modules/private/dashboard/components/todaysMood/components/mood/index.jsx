@@ -34,10 +34,8 @@ export const Mood = ({ mood }) => {
   };
 
   const getRandomQuote = async () => {
-    const response = await axios.get(
-      "https://api.quotable.io/random?tags=happiness|sadness|inspirational&maxLength=100"
-    );
-    return response.data.content;
+    const response = await axios.get("https://zenquotes.io/api/random");
+    return response.data[0].q;
   };
 
   const { data: quote } = useQuery({
