@@ -49,3 +49,17 @@ export const logout = async () => {
     console.error(err);
   }
 };
+
+export const updateUserDetails = async (data) => {
+  const formData = new FormData();
+  formData.append("avatar", data.file);
+  formData.append("name", data.name);
+  try {
+    const response = await axios.post(`${baseUrl}/update-me`, formData, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
+};

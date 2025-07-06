@@ -4,8 +4,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { onboardingSchema } from "@/lib/validations";
 import { ImageUploader } from "./components";
+import { useMutation } from "@tanstack/react-query";
+import { updateUserDetails } from "@/api/auth";
+import { ROUTES } from "@/constants/routes";
+import { useNavigate } from "react-router-dom";
 
 export const Onboarding = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -19,8 +25,20 @@ export const Onboarding = () => {
     resolver: zodResolver(onboardingSchema),
   });
 
+  const { mutate: updateDetails } = useMutation({
+    mutationFn: updateUserDetails,
+    onSuccess: (res) => {
+      console.log("Update user res", res);
+      navigate(ROUTES.DASHBOARD);
+    },
+    onError: (err) => {
+      console.log("Update user err", err);
+    },
+  });
+
   const onSubmit = (data) => {
-    console.log("Data", data);
+    if (data.name || data.file) updateDetails(data);
+    else navigate(ROUTES.DASHBOARD);
   };
 
   return (

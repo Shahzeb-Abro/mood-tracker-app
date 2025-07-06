@@ -4,8 +4,8 @@ import profile from "../../../../../../assets/images/avatar-lisa.jpg";
 import { IconDropdownArrow, IconLogout } from "@/assets/svgAssets";
 import { SettingsModal } from "@/modals";
 import { ROUTES } from "@/constants/routes";
-import { useMutation } from "@tanstack/react-query";
-import { logout } from "@/api/auth";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getMe, logout } from "@/api/auth";
 import { useNavigate } from "react-router-dom";
 
 export const ProfilePopover = () => {
@@ -20,13 +20,21 @@ export const ProfilePopover = () => {
       console.log("Error", err);
     },
   });
+
+  const { data } = useQuery({
+    queryKey: ["me"],
+    queryFn: getMe,
+  });
+
+  const user = data?.user;
+
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
         <div className="flex items-center gap-2.5">
           <img
-            src={profile}
-            alt="Lisa Profile"
+            src={user?.imgUrl || profile}
+            alt={user?.name || "Profile picture"}
             className="size-10 rounded-full"
           />
           <IconDropdownArrow />
@@ -41,8 +49,12 @@ export const ProfilePopover = () => {
         >
           <div>
             <div className="flex flex-col">
-              <h5 className="text-preset-6 text-neutral-900">Lisa Maria</h5>
-              <p className="text-preset-7 text-neutral-300">lisa@mail.com</p>
+              <h5 className="text-preset-6 text-neutral-900">
+                {user?.name || "User"}
+              </h5>
+              <p className="text-preset-7 text-neutral-300">
+                {user?.email || "user@mail.com"}
+              </p>
             </div>
             <div className="w-full h-[1px] bg-blue-100 my-3"></div>
 
