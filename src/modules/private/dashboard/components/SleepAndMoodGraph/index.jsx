@@ -1,18 +1,13 @@
 import { getMoodBetweenDates } from "@/api/mood";
 import {
-  IconHappyColor,
   IconHappyWhite,
-  IconNeutralColor,
   IconNeutralWhite,
-  IconSadColor,
   IconSadWhite,
-  IconSleep,
-  IconVeryHappyColor,
   IconVeryHappyWhite,
-  IconVerySadColor,
   IconVerySadWhite,
 } from "@/assets/svgAssets";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -24,99 +19,22 @@ import {
   LabelList,
   CartesianGrid,
 } from "recharts";
+import {
+  formatDate,
+  getEndOfDay,
+  getLast11Days,
+  getSleepColor,
+  getStartOfDay,
+  sleepLabels,
+} from "./components/helpers";
+import {
+  CustomTooltip,
+  CustomXAxisTick,
+  CustomYAxisTick,
+  DateRange,
+} from "./components";
 
-const sleepRangeOrder = {
-  "0-2 hours": 1,
-  "3-4 hours": 2,
-  "5-6 hours": 3,
-  "7-8 hours": 4,
-  "9+ hours": 5,
-};
-
-const sleepLabels = Object.keys(sleepRangeOrder);
-console.log("Sleep Labels", sleepLabels);
-
-// Helper to format dates as "Month dd"
-const formatDate = (date) =>
-  date.toLocaleString("en-US", { month: "long", day: "2-digit" });
-
-// Generate last 11 days (including today)
-const getLast11Days = () => {
-  const dates = [];
-  for (let i = 0; i < 11; i++) {
-    const d = new Date();
-    d.setDate(d.getDate() - i);
-    dates.push(formatDate(d));
-  }
-  return dates.reverse(); // Show oldest first
-};
-
-const getSleepColor = (hours) => {
-  if (hours === "9+ hours") return "#ffc97c";
-  if (hours === "7-8 hours") return "#89e780";
-  if (hours === "5-6 hours") return "#89caff";
-  if (hours === "3-4 hours") return "#b8b1ff";
-  if (hours === "0-2 hours") return "#ff9b99";
-};
-
-const popoverMoodToIcon = {
-  "Very Happy": <IconVeryHappyColor width={16} height={16} />,
-  Happy: <IconHappyColor width={16} height={16} />,
-  Neutral: <IconNeutralColor width={16} height={16} />,
-  Sad: <IconSadColor width={16} height={16} />,
-  "Very Sad": <IconVerySadColor width={16} height={16} />,
-};
-
-const CustomTooltip = ({ active, payload }) => {
-  if (
-    active &&
-    payload &&
-    payload.length &&
-    payload[0].payload.sleepValue > 0
-  ) {
-    const entry = payload[0].payload;
-    return (
-      <div className="bg-white text-white p-3 rounded-[10px] shadow-popover max-w-[165px]  w-full flex flex-col gap-3">
-        <div className="flex flex-col gap-2">
-          <div className="text-preset-8 font-semibold text-neutral-600">
-            Mood
-          </div>
-          <div className="text-preset-7 text-neutral-900 flex items-center gap-1.5">
-            <span>{popoverMoodToIcon[entry.mood]}</span> {entry.mood}
-          </div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <div className="text-preset-8 font-semibold text-neutral-600">
-            Sleep
-          </div>
-          <div className="text-preset-7 text-neutral-900">
-            {entry.sleepHours}
-          </div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <div className="text-preset-8 font-semibold text-neutral-600">
-            Reflection
-          </div>
-          <div className="text-preset-9 text-neutral-900">
-            {entry.reflection}
-          </div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <div className="text-preset-8 font-semibold text-neutral-600">
-            Tags
-          </div>
-          <div className="text-preset-9 text-neutral-900">
-            {entry.tags.join(", ")}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return null;
-};
-
-const MoodIcon = ({ mood }) => {
+export const MoodIcon = ({ mood }) => {
   const icons = {
     "Very Happy": <IconVeryHappyWhite />,
     Happy: <IconHappyWhite />,
@@ -125,61 +43,19 @@ const MoodIcon = ({ mood }) => {
     "Very Sad": <IconVerySadWhite />,
   };
 
-  return <div>{icons[mood] || "❓"}</div>;
-};
-
-const CustomXAxisTick = ({ x, y, payload }) => {
-  return (
-    <foreignObject x={x - 24} y={y} width={50} height={40}>
-      <div
-        style={{
-          fontSize: "12px",
-          textAlign: "center",
-          color: "#888",
-          fontWeight: 500,
-        }}
-      >
-        <div className="flex flex-col gap-1.5 text-center text-neutral-900">
-          <span className="text-preset-9">
-            {payload.value.split(" ").at(0)}
-          </span>
-          <span className="text-preset-8 font-semibold">
-            {payload.value.split(" ").at(1)}
-          </span>
-        </div>
-      </div>
-    </foreignObject>
-  );
-};
-
-const CustomYAxisTick = ({ x, y, payload }) => {
-  return (
-    <foreignObject x={x - 75} y={y - 20} width={100} height={40}>
-      <div
-        style={{
-          fontSize: "12px",
-          textAlign: "center",
-          color: "#888",
-          fontWeight: 500,
-        }}
-      >
-        <div className="flex items-center gap-2 flex-col">
-          <span>
-            <IconSleep width={10} height={10} />
-          </span>
-          <span className="text-preset-9 text-neutral-600">
-            {sleepLabels[payload.value - 1]}
-          </span>
-        </div>
-      </div>
-    </foreignObject>
-  );
+  return icons[mood];
 };
 
 export const MoodSleepChart = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: ["mood-sleep-chart"],
-    queryFn: getMoodBetweenDates,
+  const [startDate, setStartDate] = useState(
+    getStartOfDay(new Date(new Date().setDate(new Date().getDate() - 10)))
+  );
+
+  const [endDate, setEndDate] = useState(getEndOfDay(new Date()));
+
+  const { data } = useQuery({
+    queryKey: ["mood-sleep-chart", startDate, endDate],
+    queryFn: () => getMoodBetweenDates({ startDate, endDate }),
   });
 
   const moodData = data?.data || [];
@@ -188,12 +64,9 @@ export const MoodSleepChart = () => {
     date: formatDate(new Date(entry.createdAt)),
   }));
 
-  console.log("Mood Data", moodData);
-
   // Merge moodData into full date range
   const generateChartData = () => {
-    const last11Days = getLast11Days();
-    console.log("Last 11 Days", last11Days);
+    const last11Days = getLast11Days(endDate);
     return last11Days.map((dateStr) => {
       const match = modifiedMoodData.find((entry) => entry.date === dateStr);
       if (match) return match;
@@ -209,14 +82,19 @@ export const MoodSleepChart = () => {
 
   const chartData = generateChartData();
 
-  console.log("Chart Data", chartData);
-
-  if (isLoading) return <div>Loading...</div>;
   return (
     <div>
-      <h3 className="text-preset-3-mobile lg:text-preset-3 text-neutral-900 mb-8">
-        Mood and sleep trends
-      </h3>
+      <div className="flex items-center justify-between gap-4 flex-col lg:flex-row mb-8">
+        <h3 className="text-preset-3-mobile lg:text-preset-3 text-neutral-900 ">
+          Mood and sleep trends
+        </h3>
+        <DateRange
+          startDate={startDate}
+          endDate={endDate}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+        />
+      </div>
       <div className="overflow-x-auto">
         <div
           style={{
@@ -224,7 +102,11 @@ export const MoodSleepChart = () => {
             height: 350,
           }}
         >
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+            key={`${startDate}-${endDate}`}
+          >
             <BarChart
               data={chartData}
               margin={{ top: 20, bottom: 40, left: 30 }}
@@ -265,6 +147,7 @@ export const MoodSleepChart = () => {
                 radius={[40, 40, 0, 0]}
                 barSize={40}
                 cursor={false}
+                // isAnimationActive={false}
               >
                 {chartData.map((entry, index) => (
                   <Cell
@@ -297,7 +180,6 @@ export const MoodSleepChart = () => {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                            pointerEvents: "none",
                           }}
                         >
                           <MoodIcon mood={entry.mood} />
