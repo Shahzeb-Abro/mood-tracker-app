@@ -1,6 +1,5 @@
 import * as Popover from "@radix-ui/react-popover";
 
-import profile from "../../../../../../assets/images/avatar-lisa.jpg";
 import {
   AvatarPlaceholder,
   IconDropdownArrow,

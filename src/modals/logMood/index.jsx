@@ -35,7 +35,7 @@ export const LogMoodModal = () => {
 
   const queryClient = useQueryClient();
 
-  const { mutate: logMood } = useMutation({
+  const { mutate: logMood, isPending } = useMutation({
     mutationFn: logTodaysMood,
     onSuccess: (res) => {
       console.log("Res", res);
@@ -86,6 +86,7 @@ export const LogMoodModal = () => {
           label={currentStep === 4 ? "Submit" : "Continue"}
           className="w-full mt-6"
           onClick={currentStep === 4 ? handleSubmit(onSubmit) : handleNextStep}
+          isLoading={currentStep === 4 ? isPending : false}
         />
       }
       dialogTrigger={<Button label="Log today's mood" />}

@@ -2,6 +2,7 @@ export const Button = ({
   variant = "primary",
   label = "",
   className,
+  isLoading = false,
   ...props
 }) => {
   const variants = {
@@ -12,8 +13,24 @@ export const Button = ({
   };
 
   return (
-    <button className={`${variants[variant]} ${className}`} {...props}>
-      {label}
+    <button
+      className={`${variants[variant]} ${className} ${
+        isLoading ? "cursor-not-allowed !h-[45px]" : ""
+      }`}
+      disabled={isLoading}
+      {...props}
+    >
+      {isLoading ? (
+        <div className="flex items-center justify-center">
+          <div className="flex space-x-1">
+            <div className="w-2 h-2 bg-current rounded-full animate-bounce opacity-100 [animation-delay:-0.3s]"></div>
+            <div className="w-2 h-2 bg-current rounded-full animate-bounce opacity-60 [animation-delay:-0.15s]"></div>
+            <div className="w-2 h-2 bg-current rounded-full animate-bounce opacity-30"></div>
+          </div>
+        </div>
+      ) : (
+        label
+      )}
     </button>
   );
 };

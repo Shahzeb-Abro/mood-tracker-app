@@ -23,7 +23,7 @@ export const Register = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const { mutate: registerUser } = useMutation({
+  const { mutate: registerUser, isPending } = useMutation({
     mutationFn: _register,
     onSuccess: (res) => {
       console.log("Res", res);
@@ -35,7 +35,6 @@ export const Register = () => {
   });
 
   const onSubmit = (data) => {
-    console.log("Data", data);
     registerUser(data);
   };
 
@@ -75,7 +74,12 @@ export const Register = () => {
 
         {/* Actions  */}
         <div className="flex flex-col gap-5">
-          <Button label="Sign Up" className="w-full" type="submit" />
+          <Button
+            label="Sign Up"
+            className="w-full"
+            type="submit"
+            isLoading={isPending}
+          />
           <p className="text-preset-6 text-center">
             <span className="text-neutral-600">Already got an account?</span>{" "}
             <Link to={ROUTES.LOGIN} className="text-blue-600">

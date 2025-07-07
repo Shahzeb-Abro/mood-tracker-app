@@ -1,3 +1,4 @@
+import { getMe, updateUserDetails } from "@/api/auth";
 import { IconSettings } from "@/assets/svgAssets";
 import { Button, Input, Modal } from "@/components";
 import {
@@ -12,14 +13,19 @@ import {
 import { onboardingSchema } from "@/lib/validations";
 import { ImageUploader } from "@/modules/public/auth/onboarding/components";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export const SettingsModal = () => {
+  const [open, setOpen] = useState(false);
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm({
     defaultValues: {
       name: "",
@@ -28,11 +34,43 @@ export const SettingsModal = () => {
     resolver: zodResolver(onboardingSchema),
   });
 
+  const { mutate: updateDetails, isPending } = useMutation({
+    mutationFn: updateUserDetails,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["me"] });
+      setOpen(false);
+    },
+    onError: (err) => {
+      console.log("Update user err", err);
+    },
+  });
+
+  const { data } = useQuery({
+    queryKey: ["me"],
+    queryFn: getMe,
+  });
+
   const onSubmit = (data) => {
     console.log("Data", data);
+    if (data.name || data.file) updateDetails(data);
   };
+
+  const user = data?.user;
+
+  const handleDialogChange = (isOpen) => {
+    setOpen(isOpen);
+
+    if (!isOpen) {
+      reset({ name: user.name, file: null });
+    }
+  };
+
+  useEffect(() => {
+    if (user) reset({ name: user.name, file: null });
+  }, [user, reset]);
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={handleDialogChange}>
       <DialogTrigger asChild>
         <div className="flex items-center gap-2.5 cursor-pointer">
           <IconSettings />
@@ -66,15 +104,22 @@ export const SettingsModal = () => {
               {...register("name")}
               error={errors?.name?.message}
             />
-            <ImageUploader setValue={setValue} error={errors?.file?.message} />
+            <ImageUploader
+              setValue={setValue}
+              error={errors?.file?.message}
+              imgUrl={user?.imgUrl}
+            />
           </div>
+          {
+            <DialogFooter className="w-full">
+              <Button
+                label={"Save Changes"}
+                className="w-full"
+                isLoading={isPending}
+              />
+            </DialogFooter>
+          }
         </form>
-
-        {
-          <DialogFooter className="w-full">
-            <Button label={"Save Changes"} className="w-full" />
-          </DialogFooter>
-        }
       </DialogContent>
     </Dialog>
   );

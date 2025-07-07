@@ -23,7 +23,7 @@ export const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const { mutate: loginUser } = useMutation({
+  const { mutate: loginUser, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (res) => {
       console.log("Res", res);
@@ -75,7 +75,12 @@ export const Login = () => {
 
         {/* Actions  */}
         <div className="flex flex-col gap-5">
-          <Button label="Log In" className="w-full" type="submit" />
+          <Button
+            label="Log In"
+            className="w-full"
+            type="submit"
+            isLoading={isPending}
+          />
           <p className="text-preset-6 text-center">
             <span className="text-neutral-600">Haven't got an account?</span>{" "}
             <Link to={ROUTES.REGISTER} className="text-blue-600">

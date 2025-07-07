@@ -34,8 +34,8 @@ export const Mood = ({ mood }) => {
   };
 
   const getRandomQuote = async () => {
-    const response = await axios.get("https://zenquotes.io/api/random");
-    return response.data[0].q;
+    const response = await axios.get("https://api.adviceslip.com/advice");
+    return response.data?.slip?.advice;
   };
 
   const { data: quote } = useQuery({

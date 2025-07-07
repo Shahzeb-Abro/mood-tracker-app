@@ -1,9 +1,9 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AvatarPlaceholder } from "@/assets/svgAssets/AvatarPlaceholder";
 
-export const ImageUploader = ({ setValue, error }) => {
-  const [preview, setPreview] = useState(null);
+export const ImageUploader = ({ setValue, error, imgUrl }) => {
+  const [preview, setPreview] = useState();
   const inputRef = useRef();
   const [localError, setLocalError] = useState("");
 
@@ -26,7 +26,11 @@ export const ImageUploader = ({ setValue, error }) => {
     }
   };
 
-  console.log("Onboarding file error:", localError);
+  console.log("Local Error", localError);
+
+  useEffect(() => {
+    setPreview(imgUrl);
+  }, [imgUrl]);
 
   return (
     <div className="flex items-start gap-5">
