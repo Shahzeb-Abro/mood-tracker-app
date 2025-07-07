@@ -1,7 +1,11 @@
 import * as Popover from "@radix-ui/react-popover";
 
 import profile from "../../../../../../assets/images/avatar-lisa.jpg";
-import { IconDropdownArrow, IconLogout } from "@/assets/svgAssets";
+import {
+  AvatarPlaceholder,
+  IconDropdownArrow,
+  IconLogout,
+} from "@/assets/svgAssets";
 import { SettingsModal } from "@/modals";
 import { ROUTES } from "@/constants/routes";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -32,11 +36,15 @@ export const ProfilePopover = () => {
     <Popover.Root>
       <Popover.Trigger asChild>
         <div className="flex items-center gap-2.5">
-          <img
-            src={user?.imgUrl || profile}
-            alt={user?.name || "Profile picture"}
-            className="size-10 rounded-full"
-          />
+          {user?.imgUrl ? (
+            <img
+              src={user?.imgUrl}
+              alt={user?.name}
+              className="size-10 rounded-full object-cover"
+            />
+          ) : (
+            <AvatarPlaceholder width={40} height={40} />
+          )}
           <IconDropdownArrow />
         </div>
       </Popover.Trigger>
