@@ -39,7 +39,7 @@ export const DateRange = ({ startDate, endDate, setStartDate, setEndDate }) => {
         onClick={handleToday}
         className="px-3 py-2 text-blue-600 bg-blue-100 rounded-full text-preset-8"
       >
-        Go toToday
+        Go to Today
       </button>
       <div className="flex items-center gap-2 text-neutral-600">
         <button
