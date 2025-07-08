@@ -30,9 +30,9 @@ export const AverageSleep = ({ averageSleep, sleepTrend }) => {
   )[0];
   return (
     <div className="flex flex-col gap-3 ">
-      <h4 className="text-preset-5 text-neutral-900">
+      <h4 className="text-preset-5 text-primary-text">
         Average Sleep{" "}
-        <span className="text-preset-7 text-neutral-600">
+        <span className="text-preset-7 text-secondary-text">
           (Last 5 Check-ins)
         </span>
       </h4>

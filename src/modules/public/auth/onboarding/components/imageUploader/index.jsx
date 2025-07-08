@@ -46,8 +46,8 @@ export const ImageUploader = ({ setValue, error, imgUrl }) => {
         )}
       </div>
       <div className="flex flex-col gap-1.5">
-        <span className="text-preset-6 text-neutral-900">Upload Image</span>
-        <span className="text-preset-7 text-neutral-600">
+        <span className="text-preset-6 text-primary-text">Upload Image</span>
+        <span className="text-preset-7 text-secondary-text">
           Max 250KB, PNG or JPEG
         </span>
         <div className="mt-2">

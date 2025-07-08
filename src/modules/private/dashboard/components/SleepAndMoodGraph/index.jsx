@@ -85,7 +85,7 @@ export const MoodSleepChart = () => {
   return (
     <div>
       <div className="flex items-center justify-between gap-4 flex-col lg:flex-row mb-8">
-        <h3 className="text-preset-3-mobile lg:text-preset-3 text-neutral-900 ">
+        <h3 className="text-preset-3-mobile lg:text-preset-3 text-primary-text ">
           Mood and sleep trends
         </h3>
         <DateRange
@@ -147,7 +147,6 @@ export const MoodSleepChart = () => {
                 radius={[40, 40, 0, 0]}
                 barSize={40}
                 cursor={false}
-                // isAnimationActive={false}
               >
                 {chartData.map((entry, index) => (
                   <Cell

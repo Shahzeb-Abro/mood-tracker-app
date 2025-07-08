@@ -39,7 +39,7 @@ export const Register = () => {
   };
 
   return (
-    <main className="w-full min-h-screen light-gradient flex justify-start flex-col items-center py-20 px-4 gap-8 md:gap-12">
+    <main className="w-full min-h-screen light-gradient dark:dark-gradient flex justify-start flex-col items-center py-20 px-4 gap-8 md:gap-12">
       <div>
         <Logo />
       </div>

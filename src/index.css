@@ -102,10 +102,21 @@
   --text-preset-1: 52px;
   --text-preset-1--line-height: 120%;
   --text-preset-1--letter-spacing: -2px;
+
+  /* Tokens  */
+  --bg-surface: linear-gradient(180deg, #f5f5ff 72.99%, #e0e0ff 100%);
+
+  --bg-surface-dark: linear-gradient(180deg, #101025 72.99%, #10103a 100%);
+  --color-primary-text: var(--color-neutral-900);
+  --color-secondary-text: var(--color-neutral-600);
+  --color-tertiary-text: var(--color-neutral-300);
 }
 
-.light-gradient {
-  background-image: linear-gradient(180deg, #f5f5ff 72.99%, #e0e0ff 100%);
+body.dark {
+  --bg-surface: linear-gradient(180deg, #101025 72.99%, #10103a 100%);
+  --color-primary-text: var(--color-neutral-0);
+  --color-secondary-text: var(--color-neutral-200);
+  --color-tertiary-text: var(--color-neutral-300);
 }
 
 .shadow-auth {
@@ -140,7 +151,6 @@
 .text-preset-1-mobile {
   font-weight: 700;
 }
-
 
 .recharts-tooltip-cursor {
   display: none;
@@ -230,7 +240,7 @@ body {
 /* ---break---  */
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: #121229;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
