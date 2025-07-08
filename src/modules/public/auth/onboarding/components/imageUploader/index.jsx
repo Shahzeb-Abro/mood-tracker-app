@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components";
 import { AvatarPlaceholder } from "@/assets/svgAssets/AvatarPlaceholder";
 
 export const ImageUploader = ({ setValue, error, imgUrl }) => {
