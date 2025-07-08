@@ -63,7 +63,7 @@ export const ProfilePopover = () => {
                 {user?.email || "user@mail.com"}
               </p>
             </div>
-            <div className="w-full h-[1px] bg-blue-100 dark:bg-blue-900 my-3"></div>
+            <div className="w-full h-[1px] bg-blue-100 dark:bg-neutral-600/50 my-3"></div>
 
             <div className="flex flex-col gap-3 text-primary-text">
               <SettingsModal />

@@ -15,17 +15,17 @@ export const Modal = ({ dialogTrigger, title, subTitle, footer, children }) => {
       {dialogTrigger && <DialogTrigger asChild>{dialogTrigger}</DialogTrigger>}
 
       <DialogContent
-        className="px-5 py-8 md:px-10 md:py-12  rounded-2xl bg-blue-100 gap-0"
+        className="px-5 py-8 md:px-10 md:py-12  rounded-2xl bg-blue-100 dark:bg-neutral-900 gap-0"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogHeader className="text-left">
           {title && (
-            <DialogTitle className="!text-preset-3 md:!text-preset-2 text-neutral-900">
+            <DialogTitle className="!text-preset-3 md:!text-preset-2 text-primary-text">
               {title}
             </DialogTitle>
           )}
           {subTitle && (
-            <DialogDescription className="!text-preset-6 text-neutral-600">
+            <DialogDescription className="!text-preset-6 text-secondary-text">
               {subTitle}
             </DialogDescription>
           )}

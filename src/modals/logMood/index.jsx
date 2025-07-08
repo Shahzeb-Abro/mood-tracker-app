@@ -37,8 +37,7 @@ export const LogMoodModal = () => {
 
   const { mutate: logMood, isPending } = useMutation({
     mutationFn: logTodaysMood,
-    onSuccess: (res) => {
-      console.log("Res", res);
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["todays-mood"],
       });

@@ -35,11 +35,11 @@ export const Dashboard = () => {
         {todaysMoodLogged && <TodaysMood todaysMood={todaysMood} />}
 
         <div className="flex flex-col lg:flex-row  gap-8 ">
-          <div className="flex-1 lg:w-full lg:flex-shrink-0 py-5 px-4 md:py-6 md:px-5 lg:px-6 bg-white dark:bg-neutral-900 rounded-2xl border border-blue-100 dark:border-blue-900 flex flex-col gap-6 lg:max-w-[370px]">
+          <div className="flex-1 lg:w-full lg:flex-shrink-0 py-5 px-4 md:py-6 md:px-5 lg:px-6 bg-white dark:bg-neutral-900 rounded-2xl border border-blue-100 dark:border-neutral-600/50 flex flex-col gap-6 lg:max-w-[370px]">
             <AverageMood averageMood={averageMood} moodTrend={moodTrend} />
             <AverageSleep averageSleep={averageSleep} sleepTrend={sleepTrend} />
           </div>
-          <div className="flex-1 py-5 px-4 lg:p-8 bg-white dark:bg-neutral-900 rounded-2xl border border-blue-100 dark:border-blue-900">
+          <div className="flex-1 py-5 px-4 lg:p-8 bg-white dark:bg-neutral-900 rounded-2xl border border-blue-100 dark:border-neutral-600/50">
             <MoodSleepChart />
           </div>
         </div>

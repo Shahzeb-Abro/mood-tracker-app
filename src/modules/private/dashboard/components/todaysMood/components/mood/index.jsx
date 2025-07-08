@@ -47,15 +47,15 @@ export const Mood = ({ mood }) => {
     <div className="flex flex-col gap-8 items-center lg:items-stretch lg:justify-between lg:flex-row ">
       <div className="flex flex-col gap-8 items-center lg:items-stretch lg:justify-between">
         <div className="flex flex-col text-center lg:text-left">
-          <div className="text-preset-3 text-neutral-900/70">I'm feeling</div>
-          <div className="text-preset-2 text-neutral-900">{mood}</div>
+          <div className="text-preset-3 text-primary-text/70">I'm feeling</div>
+          <div className="text-preset-2 text-primary-text">{mood}</div>
         </div>
 
         {mood && <div className="lg:hidden">{moodToIcon[mood]["sm"]}</div>}
 
         <div className="flex flex-col gap-4 items-center text-center lg:items-start lg:text-left">
           <IconQuote />
-          <p className="text-preset-6-i text-neutral-900">“{quote}”</p>
+          <p className="text-preset-6-i text-primary-text">“{quote}”</p>
         </div>
       </div>
       {mood && (
