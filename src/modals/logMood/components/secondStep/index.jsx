@@ -99,10 +99,10 @@ export const SecondStep = ({ selectedTags, setSelectedTags }) => {
   return (
     <div className="flex flex-col gap-6 md:gap-8">
       <div className="flex flex-col gap-1.5">
-        <h3 className="text-preset-3-mobile md:text-preset-3 text-neutral-900">
+        <h3 className="text-preset-3-mobile md:text-preset-3 text-primary-text">
           How did you feel?
         </h3>
-        <p className="text-preset-6 text-neutral-600">
+        <p className="text-preset-6 text-secondary-text">
           Select up to three tags:
         </p>
       </div>

@@ -46,13 +46,13 @@ export const Login = () => {
       </div>
 
       <form
-        className="py-10 px-4 md:px-8 rounded-2xl bg-white shadow-auth flex flex-col gap-8 md:min-w-[530px]"
+        className="py-10 px-4 md:px-8 rounded-2xl bg-white dark:bg-neutral-900 shadow-auth flex flex-col gap-8 md:min-w-[530px]"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* Header  */}
         <div className="flex flex-col gap-2">
-          <h2 className="text-preset-3 text-neutral-900">Welcome Back!</h2>
-          <p className="text-preset-6 text-neutral-600">
+          <h2 className="text-preset-3 text-primary-text">Welcome Back!</h2>
+          <p className="text-preset-6 text-secondary-text">
             Log in to continue tracking your mood and sleep.
           </p>
         </div>
@@ -82,7 +82,7 @@ export const Login = () => {
             isLoading={isPending}
           />
           <p className="text-preset-6 text-center">
-            <span className="text-neutral-600">Haven't got an account?</span>{" "}
+            <span className="text-secondary-text">Haven't got an account?</span>{" "}
             <Link to={ROUTES.REGISTER} className="text-blue-600">
               Sign up.
             </Link>
