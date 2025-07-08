@@ -52,20 +52,20 @@ export const ProfilePopover = () => {
         <Popover.Content
           align="end"
           sideOffset={8}
-          className="bg-white rounded-xl shadow-popover  w-[calc(100vw-32px)] ml-[16px] sm:ml-0 sm:w-[200px] p-4 z-50 focus:outline-none"
+          className="bg-white dark:bg-neutral-900 rounded-xl shadow-popover  w-[calc(100vw-32px)] ml-[16px] sm:ml-0 sm:w-[200px] p-4 z-50 focus:outline-none"
         >
           <div>
             <div className="flex flex-col">
-              <h5 className="text-preset-6 text-neutral-900">
+              <h5 className="text-preset-6 text-primary-text">
                 {user?.name || "User"}
               </h5>
-              <p className="text-preset-7 text-neutral-300">
+              <p className="text-preset-7 text-tertiary-text">
                 {user?.email || "user@mail.com"}
               </p>
             </div>
-            <div className="w-full h-[1px] bg-blue-100 my-3"></div>
+            <div className="w-full h-[1px] bg-blue-100 dark:bg-blue-900 my-3"></div>
 
-            <div className="flex flex-col gap-3 text-neutral-900">
+            <div className="flex flex-col gap-3 text-primary-text">
               <SettingsModal />
               <button
                 onClick={() => logoutUser()}

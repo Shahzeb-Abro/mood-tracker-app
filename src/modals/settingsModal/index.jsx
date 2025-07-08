@@ -79,21 +79,21 @@ export const SettingsModal = () => {
       </DialogTrigger>
 
       <DialogContent
-        className="px-5 py-8 md:px-10 md:py-12  rounded-2xl  gap-0 focus:outline-none"
+        className="px-5 py-8 md:px-10 md:py-12  rounded-2xl  gap-0 focus:outline-none bg-white dark:bg-neutral-900"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogHeader className="flex flex-col gap-2 text-left">
-          <DialogTitle className="!text-preset-3-mobile md:!text-preset-3 text-neutral-900">
+          <DialogTitle className="!text-preset-3-mobile md:!text-preset-3 text-primary-text">
             Update your profile
           </DialogTitle>
 
-          <DialogDescription className="!text-preset-6 text-neutral-600">
+          <DialogDescription className="!text-preset-6 text-secondary-text">
             Personalize your account with your name and photo.
           </DialogDescription>
         </DialogHeader>
 
         <form
-          className=" bg-white  flex flex-col gap-8 py-6"
+          className=" bg-white dark:bg-neutral-900 flex flex-col gap-8 pt-6"
           onSubmit={handleSubmit(onSubmit)}
         >
           {/* Inputs  */}

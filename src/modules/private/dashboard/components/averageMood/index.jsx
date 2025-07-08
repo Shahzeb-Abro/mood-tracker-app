@@ -45,17 +45,15 @@ const options = [
 export const AverageMood = ({ averageMood, moodTrend }) => {
   const avgMood = averageMood;
 
-  console.log("Avg Mood", avgMood);
-
   const avgMoodDetails = options.filter(
     (option) => option.label === avgMood
   )[0];
 
   return (
     <div className="flex flex-col gap-3 ">
-      <h4 className="text-preset-5 text-neutral-900">
+      <h4 className="text-preset-5 text-primary-text">
         Average Mood{" "}
-        <span className="text-preset-7 text-neutral-600">
+        <span className="text-preset-7 text-secondary-text">
           (Last 5 Check-ins)
         </span>
       </h4>
