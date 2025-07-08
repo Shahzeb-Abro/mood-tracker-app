@@ -1,6 +1,6 @@
 import { getMe, updateUserDetails } from "@/api/auth";
 import { IconSettings } from "@/assets/svgAssets";
-import { Button, Input, Modal } from "@/components";
+import { Button, Input } from "@/components";
 import {
   Dialog,
   DialogContent,
